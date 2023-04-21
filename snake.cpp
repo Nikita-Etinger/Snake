@@ -4,6 +4,7 @@
 
 char oldS = 'w';
 int speed = 100;
+
 char** createField(int size) {
 	char** field = new char* [size];
 	for (int i = 0; i < size; i++) {
@@ -192,7 +193,8 @@ void game(char** field, int** snake, int* fruit) {
 			cout << "game over" << endl;
 			break;
 		}
-		Sleep(speed);
+		this_thread::sleep_for(chrono::milliseconds(speed));
+		cout  << speed;
 
 
 	}
@@ -233,17 +235,18 @@ int main()
 			else
 			{
 				if ( ((oldS == 'w') && (ch == 's')) || ((oldS == 'a' && ch == 'd')) || ((oldS == 'd') && (ch == 'a')) || ((oldS == 's') && (ch == 'w'))) {
-					if (ch == '+') {
-						speed -= 10;
-					}
-					if (ch == '-') {
-						speed += 10;
-					}
-					continue;
+
 				}
-				else {
+				else if (ch == 's' || ch == 'w' || ch == 'a' || ch == 'd') {
 					oldS = ch;
 				}
+				if (ch == '+') {
+					speed -= 10;
+				}
+				if (ch == '-') {
+					speed += 10;
+				}
+
 
 				
 			}
